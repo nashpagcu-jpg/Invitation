@@ -1,0 +1,213 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invitation</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #FF006E;
+        overflow: hidden;
+    }
+
+    .container {
+        background: white;
+        width: 90%;
+        max-width: 420px;
+        padding: 30px;
+        border-radius: 25px;
+        box-shadow: 0 15px 40px rgba(255, 105, 180, 0.2);
+        text-align: center;
+        position: relative;
+        animation: fadeIn 1s ease;
+    }
+
+    h1 {
+        color: #e60073;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 14px;
+        color: #666;
+    }
+
+    button {
+        margin-top: 15px;
+        padding: 10px 22px;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .primary-btn {
+        background: #ff4da6;
+        color: white;
+    }
+
+    .primary-btn:hover {
+        background: #e60073;
+        transform: scale(1.05);
+    }
+
+    .yes-btn {
+        background: #ff66b3;
+        color: white;
+    }
+
+    .no-btn {
+        background: #ffe6f2;
+        color: #e60073;
+    }
+
+    .continue-btn {
+        background: #ff99cc;
+        color: white;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 15px;
+        border-radius: 20px;
+        border: 1px solid #ffb3d9;
+        text-align: center;
+    }
+
+    img {
+        width: 180px;
+        margin-top: 15px;
+        border-radius: 15px;
+    }
+
+    a {
+        display: block;
+        margin-top: 10px;
+        color: #e60073;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .strawberry {
+        font-size: 28px;
+        animation: float 3s infinite ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-8px); }
+        100% { transform: translateY(0px); }
+    }
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- INTRO -->
+    <div id="intro">
+        <div class="strawberry">🍓</div>
+        <h1>Sweet Invitation</h1>
+        <p>You are warmly invited to our strawberry-filled celebration!</p>
+        <button class="primary-btn" onclick="openInvite()">Open Invitation</button>
+    </div>
+
+    <!-- ATTENDANCE -->
+    <div id="attendance" class="hidden">
+        <h1>Will you be attending Amari's 1st Birthday celebration? 🍓</h1>
+        <button class="yes-btn" onclick="askName()">Yes 💖</button>
+        <button class="no-btn" onclick="showNo()">No 💌</button>
+    </div>
+
+    <!-- NAME INPUT -->
+    <div id="nameSection" class="hidden">
+        <h1>Enter Your Name 🍓</h1>
+        <input type="text" id="guestName" placeholder="Your Sweet Name">
+        <button class="primary-btn" onclick="showQR()">Continue</button>
+    </div>
+
+    <!-- YES / QR SECTION -->
+    <div id="yesSection" class="hidden">
+        <h1 id="welcomeText"></h1>
+        <p>Scan the QR Code 🍓</p>
+        <img src="qr-code.png" alt="QR Code">
+        <p>Click the link to list your name:</p>
+        <a href="https://forms.gle/UwYHt289MPebbFpU6" target="_blank">
+            Click Here to Register
+        </a>
+        <button class="continue-btn" onclick="thankYou()">Continue 💕</button>
+    </div>
+
+    <!-- NO SECTION -->
+    <div id="noSection" class="hidden">
+        <h1>We'll Miss You 🍓</h1>
+        <p>Thank you for letting us know. Hope to see you next time!</p>
+    </div>
+
+    <!-- THANK YOU -->
+    <div id="thankSection" class="hidden">
+        <h1>Thank You 💗</h1>
+        <p>Your response has been received. See you at the sweetest celebration!</p>
+    </div>
+
+</div>
+
+<script>
+function openInvite() {
+    document.getElementById("intro").classList.add("hidden");
+    document.getElementById("attendance").classList.remove("hidden");
+}
+
+function askName() {
+    document.getElementById("attendance").classList.add("hidden");
+    document.getElementById("nameSection").classList.remove("hidden");
+}
+
+function showQR() {
+    let name = document.getElementById("guestName").value;
+    if(name.trim() === "") {
+        alert("Please enter your name 🍓");
+        return;
+    }
+    document.getElementById("nameSection").classList.add("hidden");
+    document.getElementById("yesSection").classList.remove("hidden");
+    document.getElementById("welcomeText").innerText = "Welcome, " + name + " 🍓";
+}
+
+function showNo() {
+    document.getElementById("attendance").classList.add("hidden");
+    document.getElementById("noSection").classList.remove("hidden");
+}
+
+function thankYou() {
+    document.getElementById("yesSection").classList.add("hidden");
+    document.getElementById("thankSection").classList.remove("hidden");
+}
+</script>
+
+</body>
+</html>
